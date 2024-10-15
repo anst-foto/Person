@@ -1,0 +1,54 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Person.CrossPlatform.ViewModels"
+             
+             mc:Ignorable="d" 
+             d:DesignWidth="800" d:DesignHeight="450"
+             
+             x:Class="Person.CrossPlatform.Views.MainView"
+             x:DataType="vm:MainViewModel">
+  <Design.DataContext>
+    <vm:MainViewModel />
+  </Design.DataContext>
+
+  <Grid ColumnDefinitions="*, 2*">
+      <ListBox Grid.Column="0"
+               ItemsSource="{Binding Persons}"
+               SelectedItem="{Binding SelectedPerson}">
+          <ListBox.ItemTemplate>
+              <DataTemplate>
+                  <TextBlock Text="{Binding FullName}"/>
+              </DataTemplate>
+          </ListBox.ItemTemplate>
+      </ListBox>
+      
+      <StackPanel Grid.Column="1">
+          <StackPanel Orientation="Horizontal">
+              <Label Content="ID"/>
+              <TextBox Text="{Binding Id}"/>
+          </StackPanel>
+          
+          <StackPanel Orientation="Horizontal">
+              <Label Content="Last name"/>
+              <TextBox Text="{Binding LastName}"/>
+          </StackPanel>
+          
+          <StackPanel Orientation="Horizontal">
+              <Label Content="First name"/>
+              <TextBox Text="{Binding FirstName}"/>
+          </StackPanel>
+          
+          <StackPanel Orientation="Horizontal">
+              <Label Content="Date of birth"/>
+              <TextBox Text="{Binding BirthDate}"/>
+          </StackPanel>
+          
+          <StackPanel Orientation="Horizontal">
+              <Label Content="Age"/>
+              <TextBox Text="{Binding Age}"/>
+          </StackPanel>
+      </StackPanel>
+  </Grid>
+</UserControl>
