@@ -8,21 +8,15 @@ namespace Person.API.Controllers;
 
 [ApiController]
 [Route("api/v0/persons")]
-public class PersonsController
+public class PersonsController : ControllerBase
 {
     private readonly PersonsContext _context;
 
-    public PersonsController()
+    // Ошибка: DbContext создавался вручную через WebApplication.CreateBuilder(). 
+    // В чем ошибка: Это ломает Dependency Injection и конфигурацию приложения. Контекст должен внедряться через конструктор.
+    public PersonsController(PersonsContext context)
     {
-        var connection = WebApplication
-            .CreateBuilder()
-            .Configuration
-            .GetConnectionString("DefaultConnection");
-        var optionsBuilder = new DbContextOptionsBuilder<PersonsContext>();
-        var options = optionsBuilder
-            .UseSqlite(connection)
-            .Options;
-        _context = new PersonsContext(options);
+        _context = context;
     }
 
     [HttpGet]
